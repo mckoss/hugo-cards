@@ -3,11 +3,11 @@
             {{ if .Params.img }}
             {{ with .Resources.Match .Params.img }}
               {{ range . }}
-                <img width="100%" src="{{ .RelPermalink }}" alt="{{ .Title }}">
+                <img src="{{ .RelPermalink }}" alt="{{ .Title }}">
               {{ end }}
             {{ end }}
             {{ else }}
-            <img width="600" src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}" alt="webjeda">
+            <img src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}">
             {{ end }}
         </div>
             
