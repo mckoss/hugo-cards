@@ -1,8 +1,7 @@
 {{ define "main" }}
 
 <div class="home">
- 
-  
+
     <div class="row pack">
 
         {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts") }}
@@ -26,7 +25,7 @@
                   </div>
                   
                   <div class="panel-body"><small>
-                    {{ .Summary | plainify | truncate 180 }}</small>
+                    {{ .Summary | plainify | safeHTML }}</small>
                   </div>
                 </div>
                 </a>
