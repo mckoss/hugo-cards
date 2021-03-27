@@ -11,13 +11,11 @@
 
           {{ if .Params.img }}
           <div class="post-img">
-            {{ with .Resources.Match .Params.img }}
-              {{ range . }}
-              <img src="{{ .RelPermalink }}" alt="{{ .Title }}">
-              {{ end }}
-            {{ end }}
+            {{ $img := .Resources.GetMatch .Params.img }}
+            {{ $thumb := $img.Fit "800x400" }}
+            <img src="{{ $thumb.RelPermalink }}" alt="{{ $img.Title }}">
           </div>
-        {{ end }}
+         {{ end }}
 
           <div class="post-content" itemprop="articleBody">
             {{ .Content }}

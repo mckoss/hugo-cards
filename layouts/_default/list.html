@@ -11,13 +11,11 @@
                 <div class="panel panel-default">
                   
                   {{ if .Params.img }}
-                  {{ with .Resources.Match .Params.img }}
-                    {{ range . }}
-                      <img src="{{ .RelPermalink }}" alt="{{ .Title }}">
-                    {{ end }}
-                  {{ end }}
+                    {{ $img := .Resources.GetMatch .Params.img }}
+                    {{ $thumb := $img.Fit "250x250" }}
+                    <img src="{{ $thumb.RelPermalink }}" alt="{{ humanize $img.Title }}">
                   {{ else }}
-                  <img src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}" alt="{{ .Site.Title }}">
+                    <img src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}" alt="{{ .Site.Title }}">
                   {{ end }}
                   
                   <div class="panel-body">
