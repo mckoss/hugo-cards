@@ -34,12 +34,15 @@
   <div class="mt10 recent">
     <h2>Recent articles</h2>        
      <ul>
+        {{ $selfLink := .Permalink }}
         {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
-          <li>
-            <p><a href="{{ .Permalink }}">{{ .Title }}</a>
-              <br><small>{{ .Date.Format "January 2, 2006" }}</small>
-            </p>
-          </li>
+          {{ if ne $selfLink .Permalink) }}
+            <li>
+              <p><a href="{{ .Permalink }}">{{ .Title }}</a>
+                <br><small>{{ .Date.Format "January 2, 2006" }}</small>
+              </p>
+            </li>
+          {{ end }}
         {{ end }}
       </ul>
   </div>
