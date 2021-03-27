@@ -36,7 +36,7 @@
      <ul>
         {{ $selfLink := .Permalink }}
         {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
-          {{ if ne $selfLink .Permalink) }}
+          {{ if ne $selfLink .Permalink }}
             <li>
               <p><a href="{{ .Permalink }}">{{ .Title }}</a>
                 <br><small>{{ .Date.Format "January 2, 2006" }}</small>
