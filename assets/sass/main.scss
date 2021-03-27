@@ -38,6 +38,18 @@ $on-laptop:        800px;
     }
 }
 
+@mixin hide-narrow() {
+    @media screen and (max-width: 991px) {
+        display: none;
+    }
+}
+
+@mixin hide-wide() {
+    @media screen and (min-width: 991px) {
+        display: none;
+    }
+}
+
 
 
 // Import partials from `sass_dir` (defaults to `_sass`)

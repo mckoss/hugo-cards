@@ -1,34 +1,46 @@
-<div class="col-md-4 mt20">
-        <div class="post-img">
-            {{ if .Params.img }}
-            {{ with .Resources.Match .Params.img }}
-              {{ range . }}
-                <img src="{{ .RelPermalink }}" alt="{{ .Title }}">
-              {{ end }}
-            {{ end }}
-            {{ else }}
-            <img src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}">
-            {{ end }}
-        </div>
-            
-        
-        <div class="mt10 recent">
-            <h2>Recent articles</h2>        
-             <ul>
-                {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
-
-                      <li>
-                      <p><a href="{{ .Permalink }}">{{ .Title }}</a><small>&nbsp;&nbsp;{{ .Date.Format "January 2, 2006" }}</small></p>
-                      </li>
-
-                {{ end }}
-              </ul>
-        </div>
-        {{ if .Site.Params.fbLikeBox }}
-        <div class="mt10">
-            <div class="fb-page" data-href="https://www.facebook.com/webjeda/" data-width="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><blockquote cite="https://www.facebook.com/webjeda/" class="fb-xfbml-parse-ignore"><a href="{site.fb-page-url}}">{{ .Site.Params.fbPageTitle}}</a></blockquote></div>
-        </div>
+<div class="sidebar col-md-4 mt20">
+  {{ if .Params.img }}
+    <div class="post-img">
+      {{ with .Resources.Match .Params.img }}
+        {{ range . }}
+        <img src="{{ .RelPermalink }}" alt="{{ .Title }}">
         {{ end }}
-        <br>
+      {{ end }}
+    </div>
+  {{ end }}
 
+  {{ if .Params.tags }}
+    {{ $added := newScratch }}
+    {{ $added.Set .Permalink true }}
+    <div class="mt10 related">
+      <h2>Related articles</h2>
+        <div class="tags"><small>Tags: {{ delimit .Params.tags ", " " and "}}</small></div>
+        <ul>
+        {{ $tags := .Site.Taxonomies.tags }}
+        {{ range $tag := .Params.tags }}
+          {{ range (index $tags $tag).Pages }}
+            {{ if not ($added.Get .Permalink) }}
+              {{ $added.Set .Permalink true }}
+              <li>
+                <p><a href="{{ .Permalink }}">{{ .Title }}</a>
+                  <br><small>{{ .Date.Format "January 2, 2006" }}</small>
+                </p>
+              </li>
+            {{ end }}
+          {{ end }}
+        {{end}}
+        </ul>
+    </div>
+  {{ end }}
+
+  <div class="mt10 recent">
+    <h2>Recent articles</h2>        
+     <ul>
+        {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
+          <li>
+          <p><a href="{{ .Permalink }}">{{ .Title }}</a><small>&nbsp;&nbsp;{{ .Date.Format "January 2, 2006" }}</small></p>
+          </li>
+        {{ end }}
+      </ul>
+  </div>
 </div>

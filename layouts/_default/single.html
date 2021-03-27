@@ -9,6 +9,16 @@
                  
           </header>
 
+          {{ if .Params.img }}
+          <div class="post-img">
+            {{ with .Resources.Match .Params.img }}
+              {{ range . }}
+              <img src="{{ .RelPermalink }}" alt="{{ .Title }}">
+              {{ end }}
+            {{ end }}
+          </div>
+        {{ end }}
+
           <div class="post-content" itemprop="articleBody">
             {{ .Content }}
           </div>
