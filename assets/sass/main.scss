@@ -38,6 +38,8 @@ $on-laptop:        800px;
     }
 }
 
+// This is a HACK.  Use these when the sidebar has wrapped to the bottom
+// of the page (normally float left, but wraps at 991 px and below).
 @mixin hide-narrow() {
     @media screen and (max-width: 991px) {
         display: none;
@@ -45,7 +47,7 @@ $on-laptop:        800px;
 }
 
 @mixin hide-wide() {
-    @media screen and (min-width: 991px) {
+    @media screen and (min-width: 992px) {
         display: none;
     }
 }
