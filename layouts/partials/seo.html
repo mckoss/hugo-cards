@@ -47,7 +47,7 @@
     "description": "{{ if .Description }}{{ .Description | plainify }}{{ else }}{{if .IsPage}}{{ .Summary | plainify  }}{{ end }}{{ end }}",
     "author": {
         "@type": "Person",
-        "name": "{{ .Site.Author.name }}"
+        "name": "{{ .Site.Params.author }}"
     }
  }
 </script>
